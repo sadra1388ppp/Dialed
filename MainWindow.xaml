@@ -719,10 +719,6 @@
                         <Border x:Name="RevealTarget" Grid.Column="0" CornerRadius="16,0,0,16"/>
                         <Border x:Name="RevealGuess" Grid.Column="1" CornerRadius="0,16,16,0"/>
                     </Grid>
-                    <Grid Margin="0,6,0,0">
-                        <TextBlock Text="Target" HorizontalAlignment="Left" Opacity=".6"/>
-                        <TextBlock Text="Yours" HorizontalAlignment="Right" Opacity=".6"/>
-                    </Grid>
                     <TextBlock x:Name="ScoreText"
                                FontSize="48"
                                FontWeight="Bold"
