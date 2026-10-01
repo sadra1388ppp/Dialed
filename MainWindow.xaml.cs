@@ -81,10 +81,66 @@ public partial class MainWindow : Window
     }
 
     private Hsb CurrentGuess => new(HueSlider.Value, SatSlider.Value, BriSlider.Value);
-    private void UpdateGuessSwatch() => GuessSwatch.Background = ToBrush(CurrentGuess);
+    private void UpdateGuessSwatch()
+    {
+        if (!IsLoaded)
+            return;
+
+        var guess = CurrentGuess;
+
+        GuessSwatch.Background = ToBrush(guess);
+        HueValueText.Text = $"{guess.Hue:0}°";
+        SatValueText.Text = $"{guess.Sat:0}%";
+        BriValueText.Text = $"{guess.Bri:0}%";
+        LiveColorHexText.Text = ToHex(guess);
+        LiveColorSubText.Text = $"H {guess.Hue:0}° · S {guess.Sat:0}% · B {guess.Bri:0}%";
+
+        UpdateControlGradients(guess);
+    }
+
     private void Slider_Changed(object s, RoutedPropertyChangedEventArgs<double> e)
     {
-        if (IsLoaded) UpdateGuessSwatch();
+        UpdateGuessSwatch();
+    }
+
+    private void UpdateControlGradients(Hsb guess)
+    {
+        var hue = ToRgbColor(guess);
+
+        SatSlider.Background = new LinearGradientBrush
+        {
+            StartPoint = new Point(0, 0),
+            EndPoint = new Point(1, 0),
+            GradientStops =
+            {
+                new GradientStop(Color.FromRgb(255, 255, 255), 0),
+                new GradientStop(hue, 1)
+            }
+        };
+
+        BriSlider.Background = new LinearGradientBrush
+        {
+            StartPoint = new Point(0, 0),
+            EndPoint = new Point(1, 0),
+            GradientStops =
+            {
+                new GradientStop(Color.FromRgb(0, 0, 0), 0),
+                new GradientStop(hue, 1),
+                new GradientStop(Color.FromRgb(255, 255, 255), 1)
+            }
+        };
+    }
+
+    private static Color ToRgbColor(Hsb c)
+    {
+        var (r, g, b) = c.ToRgb();
+        return Color.FromRgb(r, g, b);
+    }
+
+    private static string ToHex(Hsb c)
+    {
+        var (r, g, b) = c.ToRgb();
+        return $"#{r:X2}{g:X2}{b:X2}";
     }
 
     private void Confirm_Click(object s, RoutedEventArgs e)
