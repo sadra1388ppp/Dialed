@@ -203,16 +203,19 @@ public static class ColorMath
     private static double RadiansToDegrees(double radians) =>
         radians * 180.0 / Math.PI;
 
-    // Converts perceptual CIEDE2000 distance to a smooth 0-100 score.
-    // 0 Delta E is always 100%; larger perceptual errors decay smoothly.
+    // Converts CIEDE2000 perceptual distance into a calibrated 0-100 game score.
+    // Very small visual differences stay highly rewarded; severe differences approach 0%.
     public static double ScorePercentFromDeltaE(double deltaE)
     {
         if (!double.IsFinite(deltaE) || deltaE <= 0.0)
             return 100.0;
 
-        const double decay = 18.0;
-        return Math.Round(
-            Math.Clamp(100.0 * Math.Exp(-deltaE / decay), 0.0, 100.0),
-            1);
+        const double FullMissDeltaE = 60.0;
+        const double Curve = 1.35;
+
+        double normalized = Math.Clamp(deltaE / FullMissDeltaE, 0.0, 1.0);
+        double score = 100.0 * (1.0 - Math.Pow(normalized, Curve));
+
+        return Math.Round(Math.Clamp(score, 0.0, 100.0), 1);
     }
 }
