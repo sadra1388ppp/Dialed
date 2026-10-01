@@ -232,11 +232,69 @@
         </Style>
 
         <Style x:Key="SliderStyle" TargetType="Slider">
-            <Setter Property="Height" Value="30"/>
-            <Setter Property="Margin" Value="0,2"/>
-            <Setter Property="Foreground" Value="#EDEEF1"/>
-            <Setter Property="Background" Value="#343740"/>
+            <Setter Property="Height" Value="34"/>
+            <Setter Property="Margin" Value="0"/>
+            <Setter Property="Foreground" Value="#F1F2F4"/>
+            <Setter Property="Background" Value="#30333C"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Slider">
+                        <Grid Height="34">
+                            <Border Height="8"
+                                    CornerRadius="4"
+                                    Background="{TemplateBinding Background}"
+                                    VerticalAlignment="Center"
+                                    SnapsToDevicePixels="True"/>
+                            <Track x:Name="PART_Track"
+                                   VerticalAlignment="Center"
+                                   Height="34">
+                                <Track.DecreaseRepeatButton>
+                                    <RepeatButton Command="Slider.DecreaseLarge"
+                                                  Background="{TemplateBinding Foreground}"
+                                                  BorderThickness="0"
+                                                  Height="8"
+                                                  VerticalAlignment="Center"
+                                                  IsTabStop="False"/>
+                                </Track.DecreaseRepeatButton>
+
+                                <Track.Thumb>
+                                    <Thumb Width="24"
+                                           Height="24"
+                                           Cursor="Hand">
+                                        <Thumb.Template>
+                                            <ControlTemplate TargetType="Thumb">
+                                                <Border Background="#FFFFFF"
+                                                        BorderBrush="#0B0C0F"
+                                                        BorderThickness="3"
+                                                        CornerRadius="12">
+                                                    <Border.Effect>
+                                                        <DropShadowEffect BlurRadius="8"
+                                                                          ShadowDepth="0"
+                                                                          Opacity="0.35"
+                                                                          Color="#000000"/>
+                                                    </Border.Effect>
+                                                </Border>
+                                            </ControlTemplate>
+                                        </Thumb.Template>
+                                    </Thumb>
+                                </Track.Thumb>
+
+                                <Track.IncreaseRepeatButton>
+                                    <RepeatButton Command="Slider.IncreaseLarge"
+                                                  Background="Transparent"
+                                                  BorderThickness="0"
+                                                  Height="8"
+                                                  VerticalAlignment="Center"
+                                                  IsTabStop="False"/>
+                                </Track.IncreaseRepeatButton>
+                            </Track>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
         </Style>
+
     </Window.Resources>
 
     <Grid Background="{StaticResource PageBackground}">
