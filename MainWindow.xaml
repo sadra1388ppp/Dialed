@@ -242,62 +242,12 @@
     <Grid Background="{StaticResource PageBackground}">
         <Grid Margin="38,28,38,32">
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="22"/>
+                <RowDefinition Height="0"/>
+                <RowDefinition Height="0"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <Grid Grid.Row="0">
-                <StackPanel Orientation="Horizontal">
-                    <Border Width="34"
-                            Height="34"
-                            CornerRadius="11"
-                            Background="{StaticResource AccentGradient}"
-                            VerticalAlignment="Center">
-                        <TextBlock Text="D"
-                                   Foreground="#111216"
-                                   FontSize="15"
-                                   FontWeight="Bold"
-                                   HorizontalAlignment="Center"
-                                   VerticalAlignment="Center"/>
-                    </Border>
-                    <StackPanel Margin="11,0,0,0" VerticalAlignment="Center">
-                        <TextBlock Text="dialed"
-                                   FontSize="17"
-                                   FontWeight="Bold"/>
-                        <TextBlock Text="COLOUR MEMORY"
-                                   FontSize="9"
-                                   Foreground="{StaticResource MutedBrush}"
-                                   Margin="0,1,0,0"/>
-                    </StackPanel>
-                </StackPanel>
-
-                <StackPanel HorizontalAlignment="Right"
-                            VerticalAlignment="Center"
-                            Orientation="Horizontal">
-                    <Border Background="#15171C"
-                            BorderBrush="{StaticResource BorderBrush}"
-                            BorderThickness="1"
-                            CornerRadius="13"
-                            Padding="10,7">
-                        <StackPanel Orientation="Horizontal">
-                            <Ellipse Width="7"
-                                     Height="7"
-                                     Fill="#6BE3A5"
-                                     Margin="0,0,7,0"
-                                     VerticalAlignment="Center"/>
-                            <TextBlock Text="OFFLINE"
-                                       FontSize="9"
-                                       FontWeight="Bold"
-                                       Foreground="{StaticResource MutedBrush}"/>
-                        </StackPanel>
-                    </Border>
-                    <Button Content="Stats"
-                            Style="{StaticResource TextButton}"
-                            Margin="8,0,0,0"/>
-                </StackPanel>
-            </Grid>
-
+                <!-- Intentionally empty top area: the Home screen is focused on the main action. -->
             <TextBlock x:Name="HeaderText"
                        Grid.Row="1"
                        Visibility="Collapsed"/>
