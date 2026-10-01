@@ -431,25 +431,281 @@
                 </StackPanel>
 
                 <StackPanel x:Name="GuessPanel"
+                            Width="900"
+                            MaxWidth="900"
+                            HorizontalAlignment="Center"
                             VerticalAlignment="Center"
                             Visibility="Collapsed">
-                    <Border x:Name="GuessSwatch" Height="240" CornerRadius="16" Margin="0,0,0,20"/>
-                    <TextBlock Text="Hue"/>
-                    <Slider x:Name="HueSlider" Minimum="0" Maximum="360" Value="180"
-                            Style="{StaticResource SliderStyle}"
-                            ValueChanged="Slider_Changed"/>
-                    <TextBlock Text="Saturation" Margin="0,8,0,0"/>
-                    <Slider x:Name="SatSlider" Minimum="0" Maximum="100" Value="50"
-                            Style="{StaticResource SliderStyle}"
-                            ValueChanged="Slider_Changed"/>
-                    <TextBlock Text="Brightness" Margin="0,8,0,0"/>
-                    <Slider x:Name="BriSlider" Minimum="0" Maximum="100" Value="50"
-                            Style="{StaticResource SliderStyle}"
-                            ValueChanged="Slider_Changed"/>
-                    <Button Content="Confirm"
-                            Style="{StaticResource PrimaryButton}"
-                            Margin="0,20,0,0"
-                            Click="Confirm_Click"/>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1.08*"/>
+                            <ColumnDefinition Width="20"/>
+                            <ColumnDefinition Width="0.92*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Border Grid.Column="0"
+                                Background="#15171D"
+                                BorderBrush="#292C35"
+                                BorderThickness="1"
+                                CornerRadius="28"
+                                Padding="28"
+                                Style="{StaticResource HoverCard}">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+
+                                <Grid>
+                                    <StackPanel>
+                                        <TextBlock Text="YOUR COLOUR"
+                                                   FontSize="10"
+                                                   FontWeight="Bold"
+                                                   Foreground="{StaticResource MutedBrush}"/>
+                                        <TextBlock Text="Dial it in."
+                                                   FontSize="25"
+                                                   FontWeight="Bold"
+                                                   Margin="0,5,0,0"/>
+                                        <TextBlock Text="Adjust the controls and watch your colour change instantly."
+                                                   FontSize="12"
+                                                   Foreground="{StaticResource MutedBrush}"
+                                                   TextWrapping="Wrap"
+                                                   Margin="0,6,0,0"/>
+                                    </StackPanel>
+
+                                    <Border HorizontalAlignment="Right"
+                                            VerticalAlignment="Top"
+                                            Background="#1C1F27"
+                                            BorderBrush="#333741"
+                                            BorderThickness="1"
+                                            CornerRadius="11"
+                                            Padding="9,6">
+                                        <TextBlock Text="LIVE PREVIEW"
+                                                   FontSize="9"
+                                                   FontWeight="Bold"
+                                                   Foreground="#D7DAE1"/>
+                                    </Border>
+                                </Grid>
+
+                                <Grid Grid.Row="1"
+                                      Margin="0,20,0,20">
+                                    <Ellipse Width="300"
+                                             Height="300"
+                                             HorizontalAlignment="Center"
+                                             VerticalAlignment="Center"
+                                             Opacity="0.22">
+                                        <Ellipse.Fill>
+                                            <RadialGradientBrush>
+                                                <GradientStop Color="#FFFFFF" Offset="0"/>
+                                                <GradientStop Color="#FFFFFF" Offset="0.25"/>
+                                                <GradientStop Color="#6E7481" Offset="1"/>
+                                            </RadialGradientBrush>
+                                        </Ellipse.Fill>
+                                    </Ellipse>
+
+                                    <Border Width="252"
+                                            Height="252"
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"
+                                            CornerRadius="126"
+                                            Background="#0D0F13"
+                                            Padding="7">
+                                        <Border x:Name="GuessSwatch"
+                                                CornerRadius="119"
+                                                Background="#666A73">
+                                            <Border.Effect>
+                                                <DropShadowEffect BlurRadius="32"
+                                                                  ShadowDepth="0"
+                                                                  Opacity="0.38"
+                                                                  Color="#000000"/>
+                                            </Border.Effect>
+                                        </Border>
+                                    </Border>
+
+                                    <Border HorizontalAlignment="Center"
+                                            VerticalAlignment="Bottom"
+                                            Background="#D916171D"
+                                            BorderBrush="#35FFFFFF"
+                                            BorderThickness="1"
+                                            CornerRadius="14"
+                                            Padding="13,8">
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="LIVE"
+                                                       FontSize="9"
+                                                       FontWeight="Bold"
+                                                       Foreground="{StaticResource MutedBrush}"/>
+                                            <TextBlock x:Name="LiveColorHexText"
+                                                       Text="#666A73"
+                                                       FontSize="15"
+                                                       FontWeight="Bold"
+                                                       Margin="9,0,0,0"/>
+                                        </StackPanel>
+                                    </Border>
+                                </Grid>
+
+                                <Grid Grid.Row="2">
+                                    <TextBlock Text="Your colour updates as you move the controls."
+                                               FontSize="10"
+                                               Foreground="{StaticResource MutedBrush}"
+                                               VerticalAlignment="Center"/>
+
+                                    <Border HorizontalAlignment="Right"
+                                            Background="#1C1F27"
+                                            BorderBrush="#333741"
+                                            BorderThickness="1"
+                                            CornerRadius="10"
+                                            Padding="9,5">
+                                        <TextBlock x:Name="LiveColorSubText"
+                                                   Text="H 180° · S 50% · B 50%"
+                                                   FontSize="9"
+                                                   Foreground="#C0C4CC"/>
+                                    </Border>
+                                </Grid>
+                            </Grid>
+                        </Border>
+
+                        <Border Grid.Column="2"
+                                Background="#15171D"
+                                BorderBrush="#292C35"
+                                BorderThickness="1"
+                                CornerRadius="28"
+                                Padding="26"
+                                Style="{StaticResource HoverCard}">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+
+                                <StackPanel>
+                                    <TextBlock Text="COLOUR CONTROLS"
+                                               FontSize="10"
+                                               FontWeight="Bold"
+                                               Foreground="{StaticResource MutedBrush}"/>
+                                    <TextBlock Text="Build your match"
+                                               FontSize="22"
+                                               FontWeight="Bold"
+                                               Margin="0,5,0,0"/>
+                                </StackPanel>
+
+                                <StackPanel Grid.Row="1"
+                                            Margin="0,28,0,20">
+                                    <Border Background="#1B1E25"
+                                            BorderBrush="#2C3039"
+                                            BorderThickness="1"
+                                            CornerRadius="17"
+                                            Padding="16">
+                                        <StackPanel>
+                                            <Grid>
+                                                <TextBlock Text="HUE"
+                                                           FontSize="10"
+                                                           FontWeight="Bold"/>
+                                                <TextBlock x:Name="HueValueText"
+                                                           Text="180°"
+                                                           HorizontalAlignment="Right"
+                                                           FontSize="11"
+                                                           FontWeight="SemiBold"
+                                                           Foreground="{StaticResource MutedBrush}"/>
+                                            </Grid>
+                                            <Slider x:Name="HueSlider"
+                                                    Minimum="0"
+                                                    Maximum="360"
+                                                    Value="180"
+                                                    Margin="0,11,0,0"
+                                                    Foreground="#FFFFFF"
+                                                    Background="#343740"
+                                                    Style="{StaticResource SliderStyle}"
+                                                    ValueChanged="Slider_Changed"/>
+                                            <Border Height="6"
+                                                    CornerRadius="3"
+                                                    Margin="0,-9,0,0">
+                                                <Border.Background>
+                                                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                                                        <GradientStop Color="#FF3B30" Offset="0"/>
+                                                        <GradientStop Color="#FFCC00" Offset="0.17"/>
+                                                        <GradientStop Color="#34C759" Offset="0.33"/>
+                                                        <GradientStop Color="#00C7BE" Offset="0.50"/>
+                                                        <GradientStop Color="#0A84FF" Offset="0.67"/>
+                                                        <GradientStop Color="#AF52DE" Offset="0.83"/>
+                                                        <GradientStop Color="#FF3B30" Offset="1"/>
+                                                    </LinearGradientBrush>
+                                                </Border.Background>
+                                            </Border>
+                                        </StackPanel>
+                                    </Border>
+
+                                    <Border Background="#1B1E25"
+                                            BorderBrush="#2C3039"
+                                            BorderThickness="1"
+                                            CornerRadius="17"
+                                            Padding="16"
+                                            Margin="0,12,0,0">
+                                        <StackPanel>
+                                            <Grid>
+                                                <TextBlock Text="SATURATION"
+                                                           FontSize="10"
+                                                           FontWeight="Bold"/>
+                                                <TextBlock x:Name="SatValueText"
+                                                           Text="50%"
+                                                           HorizontalAlignment="Right"
+                                                           FontSize="11"
+                                                           FontWeight="SemiBold"
+                                                           Foreground="{StaticResource MutedBrush}"/>
+                                            </Grid>
+                                            <Slider x:Name="SatSlider"
+                                                    Minimum="0"
+                                                    Maximum="100"
+                                                    Value="50"
+                                                    Margin="0,11,0,0"
+                                                    Foreground="#FFFFFF"
+                                                    Background="#343740"
+                                                    Style="{StaticResource SliderStyle}"
+                                                    ValueChanged="Slider_Changed"/>
+                                        </StackPanel>
+                                    </Border>
+
+                                    <Border Background="#1B1E25"
+                                            BorderBrush="#2C3039"
+                                            BorderThickness="1"
+                                            CornerRadius="17"
+                                            Padding="16"
+                                            Margin="0,12,0,0">
+                                        <StackPanel>
+                                            <Grid>
+                                                <TextBlock Text="BRIGHTNESS"
+                                                           FontSize="10"
+                                                           FontWeight="Bold"/>
+                                                <TextBlock x:Name="BriValueText"
+                                                           Text="50%"
+                                                           HorizontalAlignment="Right"
+                                                           FontSize="11"
+                                                           FontWeight="SemiBold"
+                                                           Foreground="{StaticResource MutedBrush}"/>
+                                            </Grid>
+                                            <Slider x:Name="BriSlider"
+                                                    Minimum="0"
+                                                    Maximum="100"
+                                                    Value="50"
+                                                    Margin="0,11,0,0"
+                                                    Foreground="#FFFFFF"
+                                                    Background="#343740"
+                                                    Style="{StaticResource SliderStyle}"
+                                                    ValueChanged="Slider_Changed"/>
+                                        </StackPanel>
+                                    </Border>
+                                </StackPanel>
+
+                                <Button Grid.Row="2"
+                                        Content="CONFIRM COLOUR"
+                                        Style="{StaticResource PrimaryButton}"
+                                        FontSize="14"
+                                        Padding="22,14"
+                                        Click="Confirm_Click"/>
+                            </Grid>
+                        </Border>
+                    </Grid>
                 </StackPanel>
 
                 <StackPanel x:Name="RevealPanel"
