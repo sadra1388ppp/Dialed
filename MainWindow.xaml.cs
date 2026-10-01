@@ -35,7 +35,7 @@ public partial class MainWindow : Window
     private void ShowMenu()
     {
         HeaderText.Text = "";
-        StatsText.Text = $"Games: {_stats.GamesPlayed}   Best: {_stats.BestTotal:0.00} / {GameSession.Rounds * 10}";
+        StatsText.Text = $"Games: {_stats.GamesPlayed}   Best: {_stats.BestTotal:0.0}%";
         ShowPanel(MenuPanel);
     }
 
@@ -147,8 +147,8 @@ public partial class MainWindow : Window
         var r = _game.Submit(CurrentGuess);
         RevealTarget.Background = ToBrush(r.Target);
         RevealGuess.Background = ToBrush(r.Guess);
-        ScoreText.Text = r.Score.ToString("0.00");
-        DetailText.Text = $"Target H{r.Target.Hue:0} S{r.Target.Sat:0} B{r.Target.Bri:0}  ·  Yours H{r.Guess.Hue:0} S{r.Guess.Sat:0} B{r.Guess.Bri:0}  ·  ΔE {r.DeltaE:0.0}";
+        ScoreText.Text = $"{r.ScorePercent:0.0}%";
+        DetailText.Text = $"Accuracy {r.ScorePercent:0.0}%  ·  CIEDE2000 ΔE {r.DeltaE:0.00}";
         NextBtn.Content = _game.IsFinished ? "See results" : "Next";
         ShowPanel(RevealPanel);
     }
@@ -157,15 +157,15 @@ public partial class MainWindow : Window
     {
         if (!_game.IsFinished) { BeginRound(); return; }
 
-        bool newBest = _game.Total > _stats.BestTotal;
-        if (newBest) _stats.BestTotal = _game.Total;
+        bool newBest = _game.AverageScorePercent > _stats.BestTotal;
+        if (newBest) _stats.BestTotal = _game.AverageScorePercent;
         _stats.GamesPlayed++;
         _stats.Save();
 
         HeaderText.Text = "Results";
-        FinalScore.Text = $"{_game.Total:0.00}";
-        FinalDetail.Text = $"out of {GameSession.Rounds * 10}" + (newBest ? "\nNew personal best!" : "") +
-                           "\n\n" + string.Join("  ·  ", _game.Results.Select(r => r.Score.ToString("0.0")));
+        FinalScore.Text = $"{_game.AverageScorePercent:0.0}%";
+        FinalDetail.Text = $"Average accuracy · CIEDE2000 perceptual scoring" + (newBest ? "\nNew personal best!" : "") +
+                           "\n\n" + string.Join("  ·  ", _game.Results.Select(r => $"{r.ScorePercent:0.0}%"));
         ShowPanel(FinalPanel);
     }
 
