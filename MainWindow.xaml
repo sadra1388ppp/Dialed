@@ -251,7 +251,7 @@
                                    Height="34">
                                 <Track.DecreaseRepeatButton>
                                     <RepeatButton Command="Slider.DecreaseLarge"
-                                                  Background="{TemplateBinding Foreground}"
+                                                  Background="Transparent"
                                                   BorderThickness="0"
                                                   Height="8"
                                                   VerticalAlignment="Center"
