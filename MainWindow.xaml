@@ -1,0 +1,73 @@
+<Window x:Class="DialedApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Dialed" Width="520" Height="720" Background="#111114"
+        WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize">
+    <Window.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="Foreground" Value="#EEEEEE"/>
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="#2A2A32"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Padding" Value="0,12"/>
+            <Setter Property="Margin" Value="0,6"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+        </Style>
+    </Window.Resources>
+    <Grid Margin="32">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <TextBlock x:Name="HeaderText" Grid.Row="0" FontSize="18" Opacity=".7" HorizontalAlignment="Center"/>
+
+        <StackPanel x:Name="MenuPanel" Grid.Row="1" VerticalAlignment="Center">
+            <TextBlock Text="dialed" FontSize="56" FontWeight="Bold" HorizontalAlignment="Center"/>
+            <TextBlock Text="Humans can't reliably recall colours." Opacity=".6" HorizontalAlignment="Center" Margin="0,0,0,32"/>
+            <Button Content="Solo" Click="Solo_Click"/>
+            <Button Content="Daily (one shot)" Click="Daily_Click"/>
+            <TextBlock x:Name="StatsText" HorizontalAlignment="Center" Opacity=".6" Margin="0,24,0,0"/>
+        </StackPanel>
+
+        <StackPanel x:Name="MemorizePanel" Grid.Row="1" VerticalAlignment="Center" Visibility="Collapsed">
+            <Border x:Name="TargetSwatch" Height="340" CornerRadius="16"/>
+            <TextBlock x:Name="CountdownText" FontSize="44" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,16"/>
+        </StackPanel>
+
+        <StackPanel x:Name="GuessPanel" Grid.Row="1" VerticalAlignment="Center" Visibility="Collapsed">
+            <Border x:Name="GuessSwatch" Height="240" CornerRadius="16" Margin="0,0,0,20"/>
+            <TextBlock Text="Hue"/>
+            <Slider x:Name="HueSlider" Minimum="0" Maximum="360" Value="180" ValueChanged="Slider_Changed"/>
+            <TextBlock Text="Saturation" Margin="0,8,0,0"/>
+            <Slider x:Name="SatSlider" Minimum="0" Maximum="100" Value="50" ValueChanged="Slider_Changed"/>
+            <TextBlock Text="Brightness" Margin="0,8,0,0"/>
+            <Slider x:Name="BriSlider" Minimum="0" Maximum="100" Value="50" ValueChanged="Slider_Changed"/>
+            <Button Content="Confirm" Margin="0,20,0,0" Click="Confirm_Click"/>
+        </StackPanel>
+
+        <StackPanel x:Name="RevealPanel" Grid.Row="1" VerticalAlignment="Center" Visibility="Collapsed">
+            <Grid Height="260">
+                <Grid.ColumnDefinitions><ColumnDefinition/><ColumnDefinition/></Grid.ColumnDefinitions>
+                <Border x:Name="RevealTarget" Grid.Column="0" CornerRadius="16,0,0,16"/>
+                <Border x:Name="RevealGuess" Grid.Column="1" CornerRadius="0,16,16,0"/>
+            </Grid>
+            <Grid Margin="0,6,0,0">
+                <TextBlock Text="Target" HorizontalAlignment="Left" Opacity=".6"/>
+                <TextBlock Text="Yours" HorizontalAlignment="Right" Opacity=".6"/>
+            </Grid>
+            <TextBlock x:Name="ScoreText" FontSize="48" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,24,0,0"/>
+            <TextBlock x:Name="DetailText" HorizontalAlignment="Center" Opacity=".6" Margin="0,0,0,16"/>
+            <Button x:Name="NextBtn" Content="Next" Click="Next_Click"/>
+        </StackPanel>
+
+        <StackPanel x:Name="FinalPanel" Grid.Row="1" VerticalAlignment="Center" Visibility="Collapsed">
+            <TextBlock x:Name="FinalScore" FontSize="64" FontWeight="Bold" HorizontalAlignment="Center"/>
+            <TextBlock x:Name="FinalDetail" HorizontalAlignment="Center" Opacity=".7" TextAlignment="Center" Margin="0,8,0,24"/>
+            <Button Content="Menu" Click="Menu_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>
