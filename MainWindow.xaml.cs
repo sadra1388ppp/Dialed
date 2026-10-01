@@ -125,8 +125,7 @@ public partial class MainWindow : Window
             GradientStops =
             {
                 new GradientStop(Color.FromRgb(0, 0, 0), 0),
-                new GradientStop(hue, 1),
-                new GradientStop(Color.FromRgb(255, 255, 255), 1)
+                new GradientStop(hue, 1)
             }
         };
     }
