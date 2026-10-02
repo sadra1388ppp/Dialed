@@ -1,3 +1,3 @@
 using System.Windows;
-namespace DialedApp;
+namespace Tinto;
 public partial class App : Application { }
