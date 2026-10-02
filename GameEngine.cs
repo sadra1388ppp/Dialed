@@ -1,7 +1,7 @@
 using System.IO;
 using System.Text.Json;
 
-namespace DialedApp;
+namespace Tinto;
 
 public sealed record RoundResult(Hsb Target, Hsb Guess, double DeltaE, double ScorePercent);
 
@@ -62,7 +62,7 @@ public sealed class StatsStore
 {
     private static readonly string PathOnDisk = Path.Combine(
         Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
-        "Dialed",
+        "Tinto",
         "stats.json");
 
     public int Version { get; set; } = 2;
