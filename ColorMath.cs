@@ -1,4 +1,4 @@
-namespace DialedApp;
+namespace Tinto;
 
 public readonly record struct Hsb(double Hue, double Sat, double Bri)
 {
