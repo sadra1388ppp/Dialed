@@ -3,7 +3,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Threading;
 
-namespace DialedApp;
+namespace Tinto;
 
 public partial class MainWindow : Window
 {
@@ -46,7 +46,7 @@ public partial class MainWindow : Window
         string today = DateTime.UtcNow.ToString("yyyy-MM-dd");
         if (_stats.LastDaily == today)
         {
-            MessageBox.Show("You already played today's daily. Come back tomorrow!", "Dialed");
+            MessageBox.Show("You already played today's daily. Come back tomorrow!", "Tinto");
             return;
         }
         _stats.LastDaily = today;
